@@ -22,7 +22,7 @@ export default class App extends React.Component {
   fetchData() {
     axios.get("http://localhost:3001/questions").then(res => {
       this.setState({
-        data: res.data.results.sort((a, b) => (a.question_helpfulness < b.question_helpfulness) ? 1 : -1)
+        data: res.data.results.sort((a, b) => (a.question_helpfulness < b.question_helpfulness) ? 1 : -1 )
       })
      
     })
