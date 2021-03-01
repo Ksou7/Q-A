@@ -94,5 +94,9 @@ input[type="submit"]:hover,
 }
 
 .list {
-  overflow-y: auto;
+  margin-top: 35rem;
+  position: fixed;
+  width: 70%;
+  height: 100%;
+  overflow-y: scroll;
 }
