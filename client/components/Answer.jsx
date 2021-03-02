@@ -42,7 +42,7 @@ function reportQ() {
 
     return (
         <div className="answer">
-            <p style={{fontSize:"1.25rem"}}>{answer.body}</p>
+            <p style={{fontSize:"1.25rem", color:'#1C2321'}}>-{answer.body}</p>
             <div className="AnswerimagePanel">
                     {answer.photos.map((img, i) => {
                         return <img src={img} key={i} />
@@ -50,9 +50,9 @@ function reportQ() {
                 </div>
             
             <div style={{display:"flex", flexDirection:"row", height:"10%"}}>
-                <div style={{color:"gray", marginRight:'1.25rem'}}>by {answer.answerer_name}</div>
-                <div style={{color:"gray"}} style={{borderRight:"2px solid gray", paddingRight:"1.25rem" ,color:"gray"}}>{moment(answer.date).format('LL')}</div>
-                <div style={{color:"gray",cursor:"pointer", marginLeft:"1.25rem",borderRight:"2px solid gray", paddingRight:"1.25rem", textDecoration:"underline" }}><span style={{textDecoration:"none"}}>Helpful?</span><span onClick={() => {voteAnswer()}}>Yes ({answer.helpfulness})</span></div>
+                <div style={{color:"#A9B4C2", marginRight:'1.25rem'}}>by {answer.answerer_name}</div>
+                <div style={{color:"#A9B4C2"}} style={{borderRight:"2px solid #A9B4C2", paddingRight:"1.25rem" ,color:"#A9B4C2"}}>{moment(answer.date).format('LL')}</div>
+                <div style={{color:"#A9B4C2",cursor:"pointer", marginLeft:"1.25rem",borderRight:"2px solid #A9B4C2", paddingRight:"1.25rem", textDecoration:"underline" }}><span style={{textDecoration:"none", color:'gray'}}>Helpful?</span><span style={{color:'gray'}} onClick={() => {voteAnswer()}}>Yes ({answer.helpfulness})</span></div>
                 <div onClick={() => {reportQ()}} style={{color:"gray", marginLeft:"1.25rem", textDecoration:"underline", cursor:"pointer"}}>{rep}</div>
                
             </div>
