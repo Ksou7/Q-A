@@ -4,13 +4,17 @@ const path = require("path");
 const app = express();
 require("dotenv").config();
 const axios = require("axios");
+var bodyParser = require("body-parser");
 
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
 app.use(morgan("dev"));
 app.use(express.static(path.join(__dirname, "../public")));
 
-app.listen(process.env.PORT, () => {
-  console.log(`server running at: http://localhost:${process.env.PORT}`);
-});
+console.log(process.env.TOKEN);
 
 app.get("/questions", (req, res) => {
   axios
@@ -22,4 +26,42 @@ app.get("/questions", (req, res) => {
       res.send(response.data);
     })
     .catch((err) => console.log(err));
+});
+
+//update helfpulness counter
+app.put("/questions", async (req, res) => {
+  try {
+    console.log("body ==>", req.body);
+    const data = await axios.put(
+      `https://app-hrsei-api.herokuapp.com/api/fec2/hrnyc/qa/questions/${req.body.id}/helpful`,
+      {},
+      {
+        headers: { Authorization: process.env.TOKEN },
+      }
+    );
+    console.log("data ==>", data);
+    res.send("updated");
+  } catch (e) {
+    console.error(e);
+  }
+
+  // axios
+  //   .put(
+  //     `https://app-hrsei-api.herokuapp.com/api/fec2/hrnyc/qa/questions/${req.body.id}/helpful`,
+  //     {},
+  //     {
+  //       headers: { Authorization: process.env.TOKEN },
+  //     }
+  //   )
+  //   .then((response) => {
+  //     res.send("updated");
+  //   })
+  //   .catch((err) => {
+  //     console.log("====================================");
+  //     console.log(err);
+  //   });
+});
+
+app.listen(process.env.PORT, () => {
+  console.log(`server running at: http://localhost:${process.env.PORT}`);
 });
