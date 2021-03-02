@@ -42,7 +42,7 @@ export default class App extends React.Component {
   
   
   render() {
-    console.log(this.state.data);
+    
     let Questions = this.state.loadmore === false ?  (<QuestionList render= {this.fetchData} clicked={this.state.clicked} loadMore={this.loadMore} questions = {this.state.data.slice(0, 4)} />) :  (<QuestionList  loadMore={this.loadMore} questions = {this.state.data} />);
     
     

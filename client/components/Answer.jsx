@@ -11,22 +11,17 @@ function voteAnswer() {
     
         if(clicked === false) {
         
-          console.log('clicked');
+          
     
            axios.put(`http://localhost:3001/answers/${answer.id}`, {},  { headers: {'Content-Type': 'application/json'} }).then(res => {
              console.log("sent");
              setClicked(true)
-             console.log(clicked);
-             
            }).catch(err => console.log(err))
           }
-        else {return}
-      
-   
+        else {return}  
 }
 
-console.log(report);
-console.log(reporting);
+
 let rep = report === false ? "Report" : "Reported" 
 
 //function to report question
@@ -47,14 +42,19 @@ function reportQ() {
 
     return (
         <div className="answer">
-            <p style={{fontSize:"1.25rem"}}>{answer.body}</p>
+            <p style={{fontSize:"1.25rem", color:'#1C2321'}}>-{answer.body}</p>
+            <div className="AnswerimagePanel">
+                    {answer.photos.map((img, i) => {
+                        return <img src={img} key={i} />
+                    })}
+                </div>
             
             <div style={{display:"flex", flexDirection:"row", height:"10%"}}>
-                <div style={{color:"gray"}}>by {answer.answerer_name}</div>
-                <div style={{color:"gray"}} style={{borderRight:"2px solid gray", paddingRight:"1.25rem" ,color:"gray"}}>{moment(answer.date).format('LL')}</div>
-                <div style={{color:"gray", marginLeft:"1.25rem",borderRight:"2px solid gray", paddingRight:"1.25rem", textDecoration:"underline" }}><span style={{textDecoration:"none"}}>Helpful?</span><span onClick={() => {voteAnswer()}}>Yes ({answer.helpfulness})</span></div>
-                <div onClick={() => {reportQ()}} style={{color:"gray", marginLeft:"1.25rem", textDecoration:"underline"}}>{rep}</div>
-                {/* display images */}
+                <div style={{color:"#A9B4C2", marginRight:'1.25rem'}}>by {answer.answerer_name}</div>
+                <div style={{color:"#A9B4C2"}} style={{borderRight:"2px solid #A9B4C2", paddingRight:"1.25rem" ,color:"#A9B4C2"}}>{moment(answer.date).format('LL')}</div>
+                <div style={{color:"#A9B4C2",cursor:"pointer", marginLeft:"1.25rem",borderRight:"2px solid #A9B4C2", paddingRight:"1.25rem", textDecoration:"underline" }}><span style={{textDecoration:"none", color:'gray'}}>Helpful?</span><span style={{color:'gray'}} onClick={() => {voteAnswer()}}>Yes ({answer.helpfulness})</span></div>
+                <div onClick={() => {reportQ()}} style={{color:"gray", marginLeft:"1.25rem", textDecoration:"underline", cursor:"pointer"}}>{rep}</div>
+               
             </div>
         </div>
     )
