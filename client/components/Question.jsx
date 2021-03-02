@@ -10,16 +10,18 @@ export default function Question({questions, handleclick,render}) {
   
     //update helpfulness count function
     function vote() {
-      
+      if(clicked === false) {
         console.log(questions.question_id);
         console.log('clicked');
   
          axios.put(`http://localhost:3001/questions/${questions.question_id}`, {},  { headers: {'Content-Type': 'application/json'} }).then(res => {
            console.log("sent");
            setClicked(true)
+           console.log(clicked);
            render()
          }).catch(err => console.log(err))
-      
+        }
+      else {return}
     }
  
    
