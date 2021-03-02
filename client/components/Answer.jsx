@@ -4,7 +4,7 @@ import moment from 'moment'
 export default function Answer({answer}) {
     return (
         <div className="answer">
-            <p style={{}}>{answer.body}</p>
+            <p style={{fontSize:"1.25rem"}}>{answer.body}</p>
             
             <div style={{display:"flex", flexDirection:"row", height:"10%"}}>
                 <div style={{color:"gray"}}>by {answer.answerer_name}</div>

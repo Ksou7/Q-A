@@ -3,19 +3,26 @@ import React, {useEffect, useState} from 'react';
 import Answer from './Answer.jsx';
 
 
-export default function Question({questions}) {
+export default function Question({questions, handleclick,render}) {
 
-  const [loaded, setLoaded] = useState(false);
+  const [clicked, setClicked] = useState(false);
 
   
-  function vote() {
-    
-     console.log('clicked');
-      axios.put("/questions", {id: questions.question_id}).then(res => {
-        console.log("sent");
-      }).catch(err => console.log(err))
-
-  }
+    //update helpfulness count function
+    function vote() {
+      
+        console.log(questions.question_id);
+        console.log('clicked');
+  
+         axios.put(`http://localhost:3001/questions/${questions.question_id}`, {},  { headers: {'Content-Type': 'application/json'} }).then(res => {
+           console.log("sent");
+           setClicked(true)
+           render()
+         }).catch(err => console.log(err))
+      
+    }
+ 
+   
   // let loaded = false;
   
 
@@ -46,8 +53,8 @@ answers.sort((a) => (a.answerer_name === "Seller") ? 1 : -1);
 
     return (
         <div>
-            <h2 className="question">Q: {questions.question_body}<span className="mother"><span className="Helpful">Helpful?</span><span className="had">|</span><span  className="Yes"  onClick={vote()}>Yes</span><span  className="qCount">({questions.question_helpfulness})</span></span></h2>
-          <div>
+            <h2 className="question">Q: {questions.question_body}<span className="mother"><span className="Helpful">Helpful?</span><span className="had">|</span><span  className="Yes"  onClick={()=>{vote()}}>Yes</span><span  className="qCount">({questions.question_helpfulness})</span></span></h2>
+          <div><span>A:</span>
              {answers.map(answer => {
                 return <Answer key={answer.id} answer = {answer} />
             })}

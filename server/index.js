@@ -14,8 +14,6 @@ app.use(
 app.use(morgan("dev"));
 app.use(express.static(path.join(__dirname, "../public")));
 
-console.log(process.env.TOKEN);
-
 app.get("/questions", (req, res) => {
   axios
     .get(
@@ -29,37 +27,37 @@ app.get("/questions", (req, res) => {
 });
 
 //update helfpulness counter
-app.put("/questions", async (req, res) => {
-  try {
-    console.log("body ==>", req.body);
-    const data = await axios.put(
-      `https://app-hrsei-api.herokuapp.com/api/fec2/hrnyc/qa/questions/${req.body.id}/helpful`,
+// app.put("/questions", async (req, res) => {
+//   try {
+//     const data = await axios.put(
+//       `https://app-hrsei-api.herokuapp.com/api/fec2/hrnyc/qa/questions/${req.body.id}/helpful`,
+//       {},
+//       {
+//         headers: { Authorization: process.env.TOKEN },
+//       }
+//     );
+
+//     res.send("updated");
+//   } catch (e) {
+//     console.error(e);
+//   }
+// });
+app.put("/questions/:id", (req, res) => {
+  console.log(req.params);
+  axios
+    .put(
+      `https://app-hrsei-api.herokuapp.com/api/fec2/hrnyc/qa/questions/${req.params.id}/helpful`,
       {},
       {
         headers: { Authorization: process.env.TOKEN },
       }
-    );
-    console.log("data ==>", data);
-    res.send("updated");
-  } catch (e) {
-    console.error(e);
-  }
-
-  // axios
-  //   .put(
-  //     `https://app-hrsei-api.herokuapp.com/api/fec2/hrnyc/qa/questions/${req.body.id}/helpful`,
-  //     {},
-  //     {
-  //       headers: { Authorization: process.env.TOKEN },
-  //     }
-  //   )
-  //   .then((response) => {
-  //     res.send("updated");
-  //   })
-  //   .catch((err) => {
-  //     console.log("====================================");
-  //     console.log(err);
-  //   });
+    )
+    .then((response) => {
+      res.send("updated");
+    })
+    .catch((err) => {
+      console.error(err);
+    });
 });
 
 app.listen(process.env.PORT, () => {
