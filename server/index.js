@@ -17,7 +17,7 @@ app.use(express.static(path.join(__dirname, "../public")));
 app.get("/questions", (req, res) => {
   axios
     .get(
-      "https://app-hrsei-api.herokuapp.com/api/fec2/hrnyc/qa/questions?product_id=11004",
+      "https://app-hrsei-api.herokuapp.com/api/fec2/hrnyc/qa/questions?product_id=11048",
       { headers: { Authorization: process.env.TOKEN } }
     )
     .then((response) => {

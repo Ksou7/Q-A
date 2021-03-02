@@ -6,26 +6,24 @@ import Answer from './Answer.jsx';
 export default function Question({questions, render, reporting}) {
 
   const [clicked, setClicked] = useState(false);
+  const [loaded, setloaded] = useState(false);
 
-  
+
     //update helpfulness count function
     function vote() {
       if(clicked === false) {
       
-        console.log('clicked');
+        
   
          axios.put(`http://localhost:3001/questions/${questions.question_id}`, {},  { headers: {'Content-Type': 'application/json'} }).then(res => {
            console.log("sent");
            setClicked(true)
-           console.log(clicked);
            render()
          }).catch(err => console.log(err))
         }
       else {return}
     }
  
-   
-  // let loaded = false;
   
 
   
@@ -35,34 +33,29 @@ export default function Question({questions, render, reporting}) {
   for(var key in questions.answers) {
       answers.push(questions.answers[key])
   };
-
-//sort by helpfulness and Seller
 answers.sort((a, b) => (a.helpfulness < b.helpfulness) ? 1 : -1 );
-answers.sort((a) => (a.answerer_name === "Seller") ? 1 : -1);
 
 
+//functionality to load more answers
+function loadd() {
+  setloaded(true);
+}
 
 
-// let loadedAnswers = loaded === false ? answers.slice(0, 2) : answers;
+let loadAnswers = loaded === false && answers.length < 2  ?  (<a className="loadMoreAnswers" onClick={()=>{loadd()}} >Load More Answers</a>) : (<div></div>);
+console.log(answers);
 
-
-// function vote() {
-// useEffect(()=> {
-//   axios.put()
-// })
-// }
-     
 
     return (
         <div>
             <h2 className="question">Q: {questions.question_body}<span className="mother"><span className="Helpful">Helpful?</span><span className="had">|</span><span  className="Yes"  onClick={()=>{vote()}}>Yes</span><span  className="qCount">({questions.question_helpfulness})</span></span></h2>
-          <div><span>A:</span>
+          <div><span style={{}}>A:</span>
              {answers.map(answer => {
                 return <Answer render={render} reporting={reporting} key={answer.id} answer = {answer} />
             })}
 
         </div>
-        <a href="#">Load More Answers</a>
+        {loadAnswers}
           </div>
     )
 }
