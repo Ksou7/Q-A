@@ -80,6 +80,25 @@ app.put("/report/:id", (req, res) => {
     });
 });
 
+//update helfpulness counter for answers
+app.put("/answers/:id", (req, res) => {
+  console.log(req.params);
+  axios
+    .put(
+      `https://app-hrsei-api.herokuapp.com/api/fec2/hrnyc/qa/answers/${req.params.id}/helpful`,
+      {},
+      {
+        headers: { Authorization: process.env.TOKEN },
+      }
+    )
+    .then((response) => {
+      res.send("updated");
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+});
+
 app.listen(process.env.PORT, () => {
   console.log(`server running at: http://localhost:${process.env.PORT}`);
 });

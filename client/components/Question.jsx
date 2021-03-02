@@ -58,7 +58,7 @@ answers.sort((a) => (a.answerer_name === "Seller") ? 1 : -1);
             <h2 className="question">Q: {questions.question_body}<span className="mother"><span className="Helpful">Helpful?</span><span className="had">|</span><span  className="Yes"  onClick={()=>{vote()}}>Yes</span><span  className="qCount">({questions.question_helpfulness})</span></span></h2>
           <div><span>A:</span>
              {answers.map(answer => {
-                return <Answer reporting={reporting} key={answer.id} answer = {answer} />
+                return <Answer render={render} reporting={reporting} key={answer.id} answer = {answer} />
             })}
 
         </div>
