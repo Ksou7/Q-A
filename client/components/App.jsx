@@ -15,6 +15,7 @@ export default class App extends React.Component {
 
     };
     this.loadMore = this.loadMore.bind(this)
+    this.fetchData= this.fetchData.bind(this)
   }
 
   
@@ -42,7 +43,7 @@ export default class App extends React.Component {
   
   render() {
     console.log(this.state.data);
-    let Questions = this.state.loadmore === false ?  (<QuestionList clicked={this.state.clicked} loadMore={this.loadMore} questions = {this.state.data.slice(0, 4)} />) :  (<QuestionList  loadMore={this.loadMore} questions = {this.state.data} />);
+    let Questions = this.state.loadmore === false ?  (<QuestionList render= {this.fetchData} clicked={this.state.clicked} loadMore={this.loadMore} questions = {this.state.data.slice(0, 4)} />) :  (<QuestionList  loadMore={this.loadMore} questions = {this.state.data} />);
     
     
     

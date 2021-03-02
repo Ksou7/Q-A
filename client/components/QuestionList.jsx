@@ -1,8 +1,8 @@
 import React from 'react';
 import Question from './Question.jsx';
 
-export default function QuestionList({questions, loadMore, clicked}) {
-
+export default function QuestionList({questions, loadMore, clicked,render}) {
+ 
     
 
 
@@ -15,7 +15,7 @@ export default function QuestionList({questions, loadMore, clicked}) {
         <div>        
             <div className="List" style={{overflow:'auto'}}>
             {questions.map((question) => {
-                return <Question  questions = {question} key={question.question_id} />
+                return <Question reporting={question} render={render}  questions = {question} key={question.question_id} />
             })}
            
         </div>
