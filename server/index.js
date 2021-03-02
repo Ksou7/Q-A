@@ -17,7 +17,7 @@ app.use(express.static(path.join(__dirname, "../public")));
 app.get("/questions", (req, res) => {
   axios
     .get(
-      "https://app-hrsei-api.herokuapp.com/api/fec2/hrnyc/qa/questions?product_id=11005",
+      "https://app-hrsei-api.herokuapp.com/api/fec2/hrnyc/qa/questions?product_id=11004",
       { headers: { Authorization: process.env.TOKEN } }
     )
     .then((response) => {
@@ -42,6 +42,7 @@ app.get("/questions", (req, res) => {
 //     console.error(e);
 //   }
 // });
+//update helpfulness
 app.put("/questions/:id", (req, res) => {
   console.log(req.params);
   axios
@@ -57,6 +58,25 @@ app.put("/questions/:id", (req, res) => {
     })
     .catch((err) => {
       console.error(err);
+    });
+});
+
+//report a question
+
+app.put("/report/:id", (req, res) => {
+  axios
+    .put(
+      `https://app-hrsei-api.herokuapp.com/api/fec2/hrnyc/qa/questions/${req.params.id}/report`,
+      {},
+      {
+        headers: { Authorization: process.env.TOKEN },
+      }
+    )
+    .then((response) => {
+      res.send("reported");
+    })
+    .catch((err) => {
+      console.log(err);
     });
 });
 

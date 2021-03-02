@@ -15,7 +15,7 @@ export default function QuestionList({questions, loadMore, clicked,render}) {
         <div>        
             <div className="List" style={{overflow:'auto'}}>
             {questions.map((question) => {
-                return <Question render={render}  questions = {question} key={question.question_id} />
+                return <Question reporting={question} render={render}  questions = {question} key={question.question_id} />
             })}
            
         </div>
