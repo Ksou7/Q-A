@@ -33,6 +33,8 @@ function loadd() {
   setloaded(true);
 }
 
+let link = loaded === false ? (<a className="loadMoreAnswers" onClick={()=>{loadd()}} >Load More Answers</a>) : <br />
+
     return (
         <div>
             <h2 className="question">Q: {questions.question_body}<span className="mother"><span className="Helpful">Helpful?</span><span className="had">|</span><span  className="Yes"  onClick={()=>{vote()}}>Yes</span><span  className="qCount">({questions.question_helpfulness})</span></span></h2>
@@ -44,7 +46,7 @@ function loadd() {
           })}
 
         </div>
-        <a className="loadMoreAnswers" onClick={()=>{loadd()}} >Load More Answers</a>
+        {link}
           </div>
     )
 }
