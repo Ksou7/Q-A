@@ -6,6 +6,9 @@ require("dotenv").config();
 const axios = require("axios");
 var bodyParser = require("body-parser");
 
+let TOKEN = "26e2d4e0859086e5452a0089a1429a6dd817a32b" || process.env.TOKEN;
+let PORT = 3002 || process.env.PORT;
+
 app.use(
   bodyParser.urlencoded({
     extended: true,
@@ -18,7 +21,7 @@ app.get("/questions", (req, res) => {
   axios
     .get(
       "https://app-hrsei-api.herokuapp.com/api/fec2/hrnyc/qa/questions?product_id=11048",
-      { headers: { Authorization: process.env.TOKEN } }
+      { headers: { Authorization: TOKEN } }
     )
     .then((response) => {
       res.send(response.data);
@@ -50,7 +53,7 @@ app.put("/questions/:id", (req, res) => {
       `https://app-hrsei-api.herokuapp.com/api/fec2/hrnyc/qa/questions/${req.params.id}/helpful`,
       {},
       {
-        headers: { Authorization: process.env.TOKEN },
+        headers: { Authorization: process.TOKEN },
       }
     )
     .then((response) => {
@@ -69,7 +72,7 @@ app.put("/report/:id", (req, res) => {
       `https://app-hrsei-api.herokuapp.com/api/fec2/hrnyc/qa/questions/${req.params.id}/report`,
       {},
       {
-        headers: { Authorization: process.env.TOKEN },
+        headers: { Authorization: TOKEN },
       }
     )
     .then((response) => {
@@ -88,7 +91,7 @@ app.put("/answers/:id", (req, res) => {
       `https://app-hrsei-api.herokuapp.com/api/fec2/hrnyc/qa/answers/${req.params.id}/helpful`,
       {},
       {
-        headers: { Authorization: process.env.TOKEN },
+        headers: { Authorization: TOKEN },
       }
     )
     .then((response) => {
@@ -100,5 +103,5 @@ app.put("/answers/:id", (req, res) => {
 });
 
 app.listen(process.env.PORT, () => {
-  console.log(`server running at: http://localhost:${process.env.PORT}`);
+  console.log(`server running at: http://localhost:${PORT}`);
 });

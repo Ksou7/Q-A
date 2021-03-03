@@ -13,7 +13,7 @@ function voteAnswer() {
         
           
     
-           axios.put(`http://localhost:3001/answers/${answer.id}`, {},  { headers: {'Content-Type': 'application/json'} }).then(res => {
+           axios.put(`http://localhost:3002/answers/${answer.id}`, {},  { headers: {'Content-Type': 'application/json'} }).then(res => {
              console.log("sent");
              setClicked(true)
            }).catch(err => console.log(err))
@@ -27,7 +27,7 @@ let rep = report === false ? "Report" : "Reported"
 //function to report question
 function reportQ() {
     if(report === false) {
-        axios.put(`http://localhost:3001/report/${reporting.question_id}`).then(res => {
+        axios.put(`http://localhost:3002/report/${reporting.question_id}`).then(res => {
         setReported(true)
 
         }).catch(err => {
