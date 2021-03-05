@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import moment from 'moment';
 import axios from 'axios';
 
-export default function Answer({answer, reporting}) {
+export default function Answer({answer, reporting, render}) {
 let [report, setReported] = useState(reporting.reported)
 const [clicked, setClicked] = useState(false);
 
@@ -13,9 +13,10 @@ function voteAnswer() {
         
           
     
-           axios.put(`http://localhost:3002/answers/${answer.id}`, {},  { headers: {'Content-Type': 'application/json'} }).then(res => {
+           axios.put(`http://64.225.105.221:3002/api/questions/answers/${answer.id}`, {},  { headers: {'Content-Type': 'application/json'} }).then(res => {
              console.log("sent");
-             setClicked(true)
+             setClicked(true);
+             render();
            }).catch(err => console.log(err))
           }
         else {return}  
@@ -27,7 +28,7 @@ let rep = report === false ? "Report" : "Reported"
 //function to report question
 function reportQ() {
     if(report === false) {
-        axios.put(`http://localhost:3002/report/${reporting.question_id}`).then(res => {
+        axios.put(`http://64.225.105.221:3002/api/questions/report/${reporting.question_id}`).then(res => {
         setReported(true)
 
         }).catch(err => {

@@ -12,7 +12,7 @@ export default function Question({questions, render, reporting}) {
     //update helpfulness count function
     function vote() {
       if(clicked === false) {
-         axios.put(`http://localhost:3002/questions/${questions.question_id}`, {},  { headers: {'Content-Type': 'application/json'} }).then(res => {
+         axios.put(`http://64.225.105.221:3002/api/questions/${questions.question_id}`, {},  { headers: {'Content-Type': 'application/json'} }).then(res => {
            console.log("sent");
            setClicked(true)
            render()
@@ -33,7 +33,7 @@ function loadd() {
   setloaded(true);
 }
 
-let link = loaded === false ? (<a className="loadMoreAnswers" onClick={()=>{loadd()}} >Load More Answers</a>) : <br />
+let link = loaded === false ? (<a style={{marginLeft:"1.25rem"}} className="loadMoreAnswers" onClick={()=>{loadd()}} >Load More Answers</a>) : <br />
 
     return (
         <div>

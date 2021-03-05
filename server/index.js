@@ -5,10 +5,13 @@ const app = express();
 require("dotenv").config();
 const axios = require("axios");
 var bodyParser = require("body-parser");
+var cors = require("cors");
 
-let TOKEN = "26e2d4e0859086e5452a0089a1429a6dd817a32b" || process.env.TOKEN;
+let TOKEN = "bfb2309a70ec57683df4cb422f18d672725854bb" || process.env.TOKEN;
 let PORT = 3002 || process.env.PORT;
 
+console.log(TOKEN);
+app.use(cors());
 app.use(
   bodyParser.urlencoded({
     extended: true,
@@ -17,7 +20,7 @@ app.use(
 app.use(morgan("dev"));
 app.use(express.static(path.join(__dirname, "../public")));
 
-app.get("/questions", (req, res) => {
+app.get("/api/questions", (req, res) => {
   axios
     .get(
       "https://app-hrsei-api.herokuapp.com/api/fec2/hrnyc/qa/questions?product_id=11048",
@@ -46,14 +49,14 @@ app.get("/questions", (req, res) => {
 //   }
 // });
 //update helpfulness
-app.put("/questions/:id", (req, res) => {
+app.put("/api/questions/:id", (req, res) => {
   console.log(req.params);
   axios
     .put(
       `https://app-hrsei-api.herokuapp.com/api/fec2/hrnyc/qa/questions/${req.params.id}/helpful`,
       {},
       {
-        headers: { Authorization: process.TOKEN },
+        headers: { Authorization: TOKEN },
       }
     )
     .then((response) => {
@@ -66,7 +69,7 @@ app.put("/questions/:id", (req, res) => {
 
 //report a question
 
-app.put("/report/:id", (req, res) => {
+app.put("api/questions/report/:id", (req, res) => {
   axios
     .put(
       `https://app-hrsei-api.herokuapp.com/api/fec2/hrnyc/qa/questions/${req.params.id}/report`,
@@ -84,7 +87,7 @@ app.put("/report/:id", (req, res) => {
 });
 
 //update helfpulness counter for answers
-app.put("/answers/:id", (req, res) => {
+app.put("/api/questions/answers/:id", (req, res) => {
   console.log(req.params);
   axios
     .put(
