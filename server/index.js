@@ -20,7 +20,7 @@ app.use(
 app.use(morgan("dev"));
 app.use(express.static(path.join(__dirname, "../public")));
 
-app.get("/api/questions", (req, res) => {
+app.get("/questions", (req, res) => {
   axios
     .get(
       "https://app-hrsei-api.herokuapp.com/api/fec2/hrnyc/qa/questions?product_id=11048",
@@ -49,7 +49,7 @@ app.get("/api/questions", (req, res) => {
 //   }
 // });
 //update helpfulness
-app.put("/api/questions/:id", (req, res) => {
+app.put("/questions/:id", (req, res) => {
   console.log(req.params);
   axios
     .put(
@@ -69,7 +69,7 @@ app.put("/api/questions/:id", (req, res) => {
 
 //report a question
 
-app.put("api/questions/report/:id", (req, res) => {
+app.put("/questions/report/:id", (req, res) => {
   axios
     .put(
       `https://app-hrsei-api.herokuapp.com/api/fec2/hrnyc/qa/questions/${req.params.id}/report`,
@@ -87,7 +87,7 @@ app.put("api/questions/report/:id", (req, res) => {
 });
 
 //update helfpulness counter for answers
-app.put("/api/questions/answers/:id", (req, res) => {
+app.put("/questions/answers/:id", (req, res) => {
   console.log(req.params);
   axios
     .put(

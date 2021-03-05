@@ -21,7 +21,7 @@ export default class App extends React.Component {
   
 
   fetchData() {
-    axios.get("http://64.225.105.221:3002/api/questions").then(res => {
+    axios.get("http://64.225.105.221:3002/questions").then(res => {
       this.setState({
         data: res.data.results.sort((a, b) => (a.question_helpfulness < b.question_helpfulness) ? 1 : -1 )
       })

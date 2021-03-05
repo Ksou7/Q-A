@@ -13,7 +13,7 @@ function voteAnswer() {
         
           
     
-           axios.put(`http://64.225.105.221:3002/api/questions/answers/${answer.id}`, {},  { headers: {'Content-Type': 'application/json'} }).then(res => {
+           axios.put(`http://64.225.105.221:3002/questions/answers/${answer.id}`, {},  { headers: {'Content-Type': 'application/json'} }).then(res => {
              console.log("sent");
              setClicked(true);
              render();
@@ -28,7 +28,7 @@ let rep = report === false ? "Report" : "Reported"
 //function to report question
 function reportQ() {
     if(report === false) {
-        axios.put(`http://64.225.105.221:3002/api/questions/report/${reporting.question_id}`).then(res => {
+        axios.put(`http://64.225.105.221:3002/questions/report/${reporting.question_id}`).then(res => {
         setReported(true)
 
         }).catch(err => {
