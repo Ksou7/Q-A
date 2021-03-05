@@ -7,10 +7,9 @@ const axios = require("axios");
 var bodyParser = require("body-parser");
 var cors = require("cors");
 
-let TOKEN = "bfb2309a70ec57683df4cb422f18d672725854bb" || process.env.TOKEN;
+let TOKEN = "f42e7e47e1ca61177e5f59eda57e6a5630409916" || process.env.TOKEN;
 let PORT = 3002 || process.env.PORT;
 
-console.log(TOKEN);
 app.use(cors());
 app.use(
   bodyParser.urlencoded({
