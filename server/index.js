@@ -4,12 +4,12 @@ const path = require("path");
 const app = express();
 require("dotenv").config();
 const axios = require("axios");
-var bodyParser = require("body-parser");
-var cors = require("cors");
+const bodyParser = require("body-parser");
+const cors = require("cors");
 
-let TOKEN = "f22fa5ad2bbb82ae1bc205305613be83c4aac6da" || process.env.TOKEN;
-let PORT = 3002 || process.env.PORT;
-
+const TOKEN = "f11d843bd24e09c72cc05b8834abac63bab74d34" || process.env.TOKEN;
+const PORT = 3002 || process.env.PORT;
+console.log(TOKEN);
 app.use(cors());
 app.use(
   bodyParser.urlencoded({
