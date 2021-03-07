@@ -46,7 +46,10 @@ h1 {
   margin: 20px;
 }
 .button {
+  display: flex;
   margin: 2rem;
+  width: auto;
+  justify-content: center;
 }
 
 .btn,

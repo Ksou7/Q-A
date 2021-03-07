@@ -7,9 +7,9 @@ const axios = require("axios");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
-const TOKEN = "f11d843bd24e09c72cc05b8834abac63bab74d34" || process.env.TOKEN;
+const TOKEN = "5af747e9a9a19faea88e99edf62d545f93e41c71" || process.env.TOKEN;
 const PORT = 3002 || process.env.PORT;
-console.log(TOKEN);
+
 app.use(cors());
 app.use(
   bodyParser.urlencoded({
@@ -22,7 +22,7 @@ app.use(express.static(path.join(__dirname, "../public")));
 app.get("/questions", (req, res) => {
   axios
     .get(
-      "https://app-hrsei-api.herokuapp.com/api/fec2/hrnyc/qa/questions?product_id=11048",
+      "https://app-hrsei-api.herokuapp.com/api/fec2/hrnyc/qa/questions?product_id=11005",
       { headers: { Authorization: TOKEN } }
     )
     .then((response) => {
@@ -102,6 +102,25 @@ app.put("/questions/answers/:id", (req, res) => {
     .catch((err) => {
       console.error(err);
     });
+});
+
+// add a question functionality
+app.post("/questions", (req, res) => {
+  axios
+    .post(
+      `https://app-hrsei-api.herokuapp.com/api/fec2/hrnyc/qa/questions`,
+      {
+        body: req.body.body,
+        name: req.body.name,
+        email: req.body.email,
+        product_id: req.body.product_id,
+      },
+      {
+        headers: { Authorization: TOKEN },
+      }
+    )
+    .then((response) => res.send("created"))
+    .catch((err) => console.log(err));
 });
 
 app.listen(process.env.PORT, () => {

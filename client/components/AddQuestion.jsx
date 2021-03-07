@@ -1,57 +1,62 @@
-// import React from 'react'
-// imp
+import Modal from 'react-modal';
+import {useState} from 'react';
 
-// export default function AddQuestion() {
-//     return (
-//         <div>
-//             <InputGroup className="mb-3">
-//     <InputGroup.Prepend>
-//       <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
-//     </InputGroup.Prepend>
-//     <FormControl
-//       placeholder="Username"
-//       aria-label="Username"
-//       aria-describedby="basic-addon1"
-//     />
-//   </InputGroup>
+const customStyles = {
+    content : {
+      top                   : '50%',
+      left                  : '50%',
+      right                 : 'auto',
+      bottom                : 'auto',
+      marginRight           : '-50%',
+      transform             : 'translate(-50%, -50%)'
+    }
+  };
 
-//   <InputGroup className="mb-3">
-//     <FormControl
-//       placeholder="Recipient's username"
-//       aria-label="Recipient's username"
-//       aria-describedby="basic-addon2"
-//     />
-//     <InputGroup.Append>
-//       <InputGroup.Text id="basic-addon2">@example.com</InputGroup.Text>
-//     </InputGroup.Append>
-//   </InputGroup>
+  Modal.setAppElement('#questions');
 
-//   <label htmlFor="basic-url">Your vanity URL</label>
-//   <InputGroup className="mb-3">
-//     <InputGroup.Prepend>
-//       <InputGroup.Text id="basic-addon3">
-//         https://example.com/users/
-//       </InputGroup.Text>
-//     </InputGroup.Prepend>
-//     <FormControl id="basic-url" aria-describedby="basic-addon3" />
-//   </InputGroup>
 
-//   <InputGroup className="mb-3">
-//     <InputGroup.Prepend>
-//       <InputGroup.Text>$</InputGroup.Text>
-//     </InputGroup.Prepend>
-//     <FormControl aria-label="Amount (to the nearest dollar)" />
-//     <InputGroup.Append>
-//       <InputGroup.Text>.00</InputGroup.Text>
-//     </InputGroup.Append>
-//   </InputGroup>
+const AddQuestion = () => {
+  var subtitle;
 
-//   <InputGroup>
-//     <InputGroup.Prepend>
-//       <InputGroup.Text>With textarea</InputGroup.Text>
-//     </InputGroup.Prepend>
-//     <FormControl as="textarea" aria-label="With textarea" />
-//   </InputGroup>
-//         </div>
-//     )
-// }
+  const [modalIsOpen,setIsOpen] = useState(false);
+
+  function openModal() {
+    setIsOpen(true);
+  };
+
+  function afterOpenModal() {
+    subtitle.style.color = '#f00';
+  };
+
+  function closeModal(){
+    setIsOpen(false);
+  };
+
+    return (
+        <div>
+             {/* <button >Open Modal</button>  */}
+             <div  className="button"><a onClick={openModal} className="btn btn-dark btn-big">add a question </a></div>
+        <Modal
+          isOpen={modalIsOpen}
+          onAfterOpen={afterOpenModal}
+          onRequestClose={closeModal}
+          style={customStyles}
+          contentLabel="Example Modal"
+        >
+ 
+          <h2 ref={_subtitle => (subtitle = _subtitle)}>Hello</h2>
+          <button onClick={closeModal}>close</button>
+          <div>I am a modal</div>
+          <form>
+            <input />
+            <button>tab navigation</button>
+            <button>stays</button>
+            <button>inside</button>
+            <button>the modal</button>
+          </form>
+        </Modal>
+        </div>
+    )
+}
+
+export default AddQuestion
