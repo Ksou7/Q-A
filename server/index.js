@@ -106,6 +106,7 @@ app.put("/questions/answers/:id", (req, res) => {
 
 // add a question functionality
 app.post("/questions", (req, res) => {
+  console.log(req.body);
   axios
     .post(
       `https://app-hrsei-api.herokuapp.com/api/fec2/hrnyc/qa/questions`,

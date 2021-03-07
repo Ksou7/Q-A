@@ -12,8 +12,9 @@ export default class App extends React.Component {
       data: [],
       loadmore: false,
       clicked: false,
-
+      product_id: ""
     };
+
     this.loadMore = this.loadMore.bind(this)
     this.fetchData= this.fetchData.bind(this)
   }
@@ -23,7 +24,8 @@ export default class App extends React.Component {
   fetchData() {
     axios.get("http://localhost:3002/questions").then(res => {
       this.setState({
-        data: res.data.results.sort((a, b) => (a.question_helpfulness < b.question_helpfulness) ? 1 : -1 )
+        data: res.data.results.sort((a, b) => (a.question_helpfulness < b.question_helpfulness) ? 1 : -1 ),
+        product_id:res.data.product_id
       })
      
     })
@@ -42,8 +44,8 @@ export default class App extends React.Component {
   
   
   render() {
-    
-    let Questions = this.state.loadmore === false ?  (<QuestionList render= {this.fetchData} clicked={this.state.clicked} loadMore={this.loadMore} questions = {this.state.data.slice(0, 4)} />) :  (<QuestionList  loadMore={this.loadMore} questions = {this.state.data} />);
+    console.log(this.state.product_id);
+    let Questions = this.state.loadmore === false ?  (<QuestionList productId={this.state.product_id} render= {this.fetchData} clicked={this.state.clicked} loadMore={this.loadMore} questions = {this.state.data.slice(0, 4)} />) :  (<QuestionList  loadMore={this.loadMore} questions = {this.state.data} />);
     
     
     

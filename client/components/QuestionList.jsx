@@ -2,7 +2,7 @@ import React from 'react';
 import Question from './Question.jsx';
 import AddQuestion from './AddQuestion.jsx'
 
-export default function QuestionList({questions, loadMore, clicked,render}) {
+export default function QuestionList({questions, loadMore, clicked,render, productId}) {
  
   
     
@@ -21,7 +21,7 @@ export default function QuestionList({questions, loadMore, clicked,render}) {
         </div>
         <div style={{display:'flex', flexDirection:'row', justifySelf:"center"}}>
         {button}
-         <AddQuestion />
+         <AddQuestion productId={productId}/>
            </div>
             </div>
 
