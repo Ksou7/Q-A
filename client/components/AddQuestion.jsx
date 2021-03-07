@@ -24,7 +24,7 @@ const customStyles = {
 const AddQuestion = ({productId}) => {
   var subtitle;
   const [formData, setFormData] = useState({body: "", name:"", email:""})
-//   formData.product_id = productId;
+  formData.product_id = productId;
 
   
 
@@ -36,7 +36,7 @@ const AddQuestion = ({productId}) => {
   const [modalIsOpen,setIsOpen] = useState(false);
 
 function submitQuestion() {
-    axios.post('http://localhost:3002/questions', formData).then(res => {
+    axios.post('http://localhost:3002/questions', {Headers:{'Content-Type':'application/json'}}, formData).then(res => {
         console.log('submitted');
     }).catch(err => console.log(err))
     console.log(formData);

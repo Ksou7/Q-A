@@ -11,11 +11,7 @@ const TOKEN = "5af747e9a9a19faea88e99edf62d545f93e41c71" || process.env.TOKEN;
 const PORT = 3002 || process.env.PORT;
 
 app.use(cors());
-app.use(
-  bodyParser.urlencoded({
-    extended: true,
-  })
-);
+app.use(bodyParser.json());
 app.use(morgan("dev"));
 app.use(express.static(path.join(__dirname, "../public")));
 
@@ -105,24 +101,29 @@ app.put("/questions/answers/:id", (req, res) => {
 });
 
 // add a question functionality
-app.post("/questions", (req, res) => {
-  console.log(req.body);
-  axios
-    .post(
-      `https://app-hrsei-api.herokuapp.com/api/fec2/hrnyc/qa/questions`,
-      {
-        body: req.body.body,
-        name: req.body.name,
-        email: req.body.email,
-        product_id: req.body.product_id,
-      },
-      {
-        headers: { Authorization: TOKEN },
-      }
-    )
-    .then((response) => res.send("created"))
-    .catch((err) => console.log(err));
-});
+// app.post("/questions", (req, res) => {
+//   req.body = JSON.stringify(req.body);
+//   console.log(req.body);
+//   let parsed = JSON.parse(req.body);
+//   let id = parseInt(parsed.product_id);
+//   console.log(id);
+//   console.log(parsed);
+//   axios
+//     .post(
+//       `https://app-hrsei-api.herokuapp.com/api/fec2/hrnyc/qa/questions`,
+//       {
+//         body: req.body.body,
+//         name: req.body.name,
+//         email: req.body.email,
+//         product_id: id,
+//       },
+//       {
+//         headers: { Authorization: TOKEN },
+//       }
+//     )
+//     .then((response) => res.send("created"))
+//     .catch((err) => console.log(err));
+// });
 
 app.listen(process.env.PORT, () => {
   console.log(`server running at: http://localhost:${PORT}`);
